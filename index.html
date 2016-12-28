@@ -1,0 +1,105 @@
+<script>
+    var rank = 0;
+    var rankDesc = ["Bronze", "Silver", "Gold","Platinum", "Diamond"];
+    var imageSrc = ["bronze.png", "silver.png", "gold.png", "platinum.png", "diamond.png"];
+    var rankSecond = ["V", "IV", "III", "II", "I"];
+    var lp = -1;
+    
+    var games = 0;
+    var won = 0;
+    
+    function updateRank(){
+        var result = Math.floor(rank / 5);
+        var divResult = rank - (5*result);
+    
+        
+        if(lp < 0){
+            document.getElementById("ranked-LP").innerHTML = games + " out of 10 placement matches.";
+        }else{
+            document.getElementById("ranked-image").src = imageSrc[result];
+            document.getElementById("ranked-Name").innerHTML = rankDesc[result] + " " + rankSecond[divResult]; 
+            document.getElementById("ranked-LP").innerHTML = lp + "LP";
+        }
+        
+        document.getElementById("ranked-Games").innerHTML = games + " Games Played";
+        document.getElementById("ranked-WinRate").innerHTML = Math.floor(won/games * 100) + "% winrate";
+        
+    }
+    
+    function playGame(){
+        games++;
+        simulateGame();
+        if(games== 10){
+            rank = won;
+            lp = 0;
+        }
+        updateRank();
+    }
+    function increaseRank(){
+        if(rank != 24){
+            rank++;
+        }
+    }
+    function decreaseRank(){
+        if(rank != 1){
+            rank--;
+        }
+    }
+    
+    function simulateGame(){
+        if(Math.random() > 0.46){
+            won++;
+            document.getElementById("ranked-Result").innerHTML = "Won Game";
+            addLP();
+        }else{
+            loseLP();
+            document.getElementById("ranked-Result").innerHTML = "Lost Game";
+        }
+        if(lp < 0 && games > 10){
+            lp = 0;
+        }
+    }
+    
+    function addLP(){
+        if(lp > -1){
+            lp += Math.floor(Math.random() * 10 + 10);
+            if(lp > 100 && rank < 25){
+                lp = 0;
+                rank++;
+            }
+        }
+
+    }
+    
+    function loseLP(){
+        if(lp > -1){
+            lp -= Math.floor(Math.random() * 10 + 10);
+            if(lp < 0 && rank > 0){
+                lp = 75;
+                rank--;
+            }
+        }
+    }
+    
+    
+
+</script>
+<html>
+    <head>
+        <title>Lego Legends</title>
+        <link type="text/css" rel="stylesheet" href="mystyle.css">
+    </head>
+    
+    <body>
+    <div class="header">League o Regends</div>
+    <div class="bigText" id="ranked-Games">  </div>
+    <div class="bigText" id="ranked-WinRate">  </div>
+    <img src="unranked.png" id="ranked-image" class="rank">
+    <div class="textRank" id="ranked-Name">Unranked</div>
+    <div class="textRank" id="ranked-LP"></div>
+    <div class="bigText" id="ranked-Result"></div>
+    <button onclick="playGame()" class="playgame">Play Ranked</button>
+    </body>
+
+
+</html>

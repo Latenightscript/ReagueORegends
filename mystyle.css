@@ -1,0 +1,43 @@
+body{
+    background-color: #ecf0f1;
+    font-family: Helvetica;
+}
+
+.rank{
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+    width=192;
+    height=192;
+}
+.textRank{
+    text-align: center;
+    height: 40px;
+
+}
+
+.bigText{
+    text-align: center;
+    height: 40px;
+    padding-top: 20;
+    font-size: 30;
+
+}
+.header{
+    width: 100%;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+    padding-top: 90;
+    padding-bottom: 20;
+    font-size: 40;
+
+}
+
+.playgame{
+    width:40%;
+    margin-left: 30%;
+    margin-top: 50;
+    height:50px;
+    
+}
